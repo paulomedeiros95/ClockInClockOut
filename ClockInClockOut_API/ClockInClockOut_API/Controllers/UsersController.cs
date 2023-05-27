@@ -3,9 +3,9 @@ using ClockInClockOut_Domain.Domains;
 using ClockInClockOut_Dto.Request;
 using ClockInClockOut_Dto.Response;
 using ClockInClockOut_Services.Exceptions;
+using ClockInClockOut_Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Vibbra.Hourglass.Service.Interfaces;
 
 namespace ClockInClockOut_API.Controllers
 {

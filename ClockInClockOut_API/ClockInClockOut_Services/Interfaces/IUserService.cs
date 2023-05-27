@@ -1,6 +1,6 @@
 ﻿using ClockInClockOut_Domain.Domains;
 
-namespace Vibbra.Hourglass.Service.Interfaces
+namespace ClockInClockOut_Services.Interfaces
 {
     public interface IUserService
     {

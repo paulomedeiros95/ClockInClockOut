@@ -2,16 +2,9 @@
 using ClockInClockOut_Domain.Domains;
 using ClockInClockOut_Infra.Interfaces;
 using ClockInClockOut_Services.Exceptions;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using Vibbra.Hourglass.Service.Interfaces;
+using ClockInClockOut_Services.Interfaces;
 
-namespace Vibbra.Hourglass.Service.Services
+namespace ClockInClockOut_Services.Services
 {
     public class UserService : IUserService
     {

@@ -12,8 +12,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Vibbra.Hourglass.Service.Interfaces;
-using Vibbra.Hourglass.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
