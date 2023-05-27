@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClockInClockOut_CrossCutting\ClockInClockOut_CrossCutting.csproj" />
+    <ProjectReference Include="..\ClockInClockOut_Domain\ClockInClockOut_Domain.csproj" />
+    <ProjectReference Include="..\ClockInClockOut_Infra\ClockInClockOut_Infra.csproj" />
+  </ItemGroup>
+
+</Project>
