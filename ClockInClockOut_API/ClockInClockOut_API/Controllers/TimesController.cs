@@ -62,12 +62,12 @@ namespace ClockInClockOut_API.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("Bater")]
         [ProducesResponseType(typeof(TimeResponseDTO), 201)]
         [ProducesResponseType(typeof(ErrorResponseDTO), 409)]
         [ProducesResponseType(typeof(ErrorResponseDTO), 422)]
         [ProducesResponseType(typeof(ErrorResponseDTO), 500)]
-        public async Task<IActionResult> Create([FromBody] TimeRequestDTO timeRequestDTO)
+        public async Task<IActionResult> Bater([FromBody] TimeRequestDTO timeRequestDTO)
         {
             if (timeRequestDTO == null)
             {

@@ -94,7 +94,7 @@ namespace ClockInClockOut_API.Configuration
 
                 var info = new OpenApiInfo()
                 {
-                    Title = "Clock In Clock Out API",
+                    Title = "Controle de Ponto API",
                     Version = description.ApiVersion.ToString(),
                     Description = "<ul>" +
                      "<li>Desafio Técnico Ília/li>" +
