@@ -5,10 +5,8 @@ namespace ClockInClockOut_Dto.Request
     {
         public DateTime StartedAt { get; set; }
 
-        public DateTime EndedAt { get; set; }
+        //public DateTime EndedAt { get; set; }
 
-        public int UserID { get; set; }
-
-        public int ProjectID { get; set; }
+        //public int ProjectID { get; set; }
     }
 }

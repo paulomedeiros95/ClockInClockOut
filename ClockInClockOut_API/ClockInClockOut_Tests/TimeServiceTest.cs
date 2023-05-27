@@ -228,7 +228,7 @@ namespace ClockInClockOut_Tests
                 .ReturnsAsync(times);
 
             // Act
-            var result = await _timeService.FindAllByProject(projectID);
+            var result = await _timeService.GetUserClocksPerMonth(projectID);
 
             // Assert
             Assert.IsNotNull(result);
@@ -245,7 +245,7 @@ namespace ClockInClockOut_Tests
                 .ReturnsAsync(new List<TimeDomain>());
 
             // Act & Assert
-            Assert.ThrowsAsync<NotFoundException>(async () => await _timeService.FindAllByProject(projectID));
+            Assert.ThrowsAsync<NotFoundException>(async () => await _timeService.GetUserClocksPerMonth(projectID));
         }
 
         [Test]

@@ -35,15 +35,13 @@ namespace ClockInClockOut_Services.Services
 
         public async Task<TimeDomain> Add(TimeDomain time)
         {
-            if (time.StartedAt == DateTime.MinValue || time.EndedAt == DateTime.MinValue || time.ProjectID == 0 || time.UserID == 0)
+            if (time.StartedAt == DateTime.MinValue || time.StartedAt == DateTime.MaxValue || time.UserID == 0)
                 throw new RequiredFieldException("Required fields not filled in");
 
-            if (time.StartedAt >= time.EndedAt)
-                throw new RequiredFieldException("End date less than start date");
-
             await ValidateUser(time);
-            await ValidateProject(time);
-            await ValidateTimeDuplicatedNew(time);
+            await ValidateCloskQtd(time);
+            await ValidateWeekends(time);            
+            await ValidateTimeDuplicatedNew(time);            
 
             var result = await _timeRepository.Insert(time);
 
@@ -53,9 +51,9 @@ namespace ClockInClockOut_Services.Services
         }
 
 
-        public async Task<List<TimeDomain>> FindAllByProject(int projectID)
+        public async Task<List<TimeDomain>> GetUserClocksPerMonth(int userId, DateTime dateConverted)
         {
-            var timesDB = (await _timeRepository.Select(x => x.ProjectID == projectID)).ToList();
+            var timesDB = (await _timeRepository.Select(x => x.UserID == userId && x.CreatedDate.Month  == dateConverted.Month)).ToList();
 
             if (timesDB.Count == 0)
                 throw new NotFoundException("No time posting found");
@@ -95,13 +93,7 @@ namespace ClockInClockOut_Services.Services
         private async Task ValidateTimeDuplicatedNew(TimeDomain time)
         {
             var timeDB = await _timeRepository.Select(x =>
-                                x.UserID == time.UserID &&
-                                (
-                                    (x.StartedAt <= time.StartedAt && time.StartedAt <= x.EndedAt) ||
-                                    (x.StartedAt <= time.EndedAt && time.EndedAt <= x.EndedAt) ||
-                                    (time.StartedAt <= x.StartedAt && x.EndedAt <= time.EndedAt)
-                                )
-                            );
+                                x.UserID == time.UserID && x.StartedAt <= time.StartedAt);
 
             if (timeDB.Count > 0)
                 throw new DuplicateItemException("Release conflicts with other time posting period for this user");
@@ -140,6 +132,23 @@ namespace ClockInClockOut_Services.Services
             }
         }
 
+        private async Task ValidateCloskQtd(TimeDomain time)
+        {
+            var quantity = await _timeRepository.Select(x => x.UserID == time.UserID && x.CreatedDate.Day == DateTime.Now.Day);
+
+            if (quantity.Count() >= 4)
+            {
+                throw new Exception("No more than 4 cloks registrations are allowed, please contact your manager.");
+            }
+        }
+
+        private async Task ValidateWeekends(TimeDomain time)
+        {
+            if (time.StartedAt.DayOfWeek == DayOfWeek.Saturday || time.StartedAt.DayOfWeek == DayOfWeek.Sunday)
+            {
+                throw new Exception("Cloks registrations are not allowed during the weekends, please contact your manager.");
+            }           
+        }
         #endregion
     }
 }

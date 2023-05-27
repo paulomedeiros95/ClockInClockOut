@@ -50,7 +50,7 @@ namespace ClockInClockOut_Services.Services
             string token = Token.CreateToken(new Dictionary<string, string>()
             {
                 {"email", user.Email},
-                {"id", user.ID.ToString() },
+                {"id", userDB.ID.ToString() },
             }, jwtSecret);
 
             return (token, userDB);
