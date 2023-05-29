@@ -38,7 +38,7 @@ namespace ClockInClockOut_API.Controllers
         #region Methods
 
         [HttpGet("folhas-de-ponto/{mes}")]
-        [ProducesResponseType(typeof(List<TimeResponseDTO>), 200)]
+        [ProducesResponseType(typeof(List<ReportResponseDto>), 200)]
         [ProducesResponseType(typeof(ErrorResponseDTO), 404)]
         [ProducesResponseType(typeof(ErrorResponseDTO), 422)]
         [ProducesResponseType(typeof(ErrorResponseDTO), 500)]
@@ -58,7 +58,7 @@ namespace ClockInClockOut_API.Controllers
                 
                 var times = await _timeService.GetUserClocksPerMonth(userId, monthConverted);
 
-                return Ok(_mapper.Map<List<TimeResponseDTO>>(times));
+                return Ok(_mapper.Map<List<ReportResponseDto>>(times));
             }
             catch (NotFoundException ex)
             {

@@ -51,9 +51,9 @@ namespace ClockInClockOut_Services.Services
         }
 
 
-        public async Task<List<TimeDomain>> GetUserClocksPerMonth(int userId, DateTime dateConverted)
+        public async Task<List<TimeDomain>> GetUserClocksPerMonth(int userId, DateTime month)
         {
-            var timesDB = (await _timeRepository.Select(x => x.UserID == userId && x.CreatedDate.Month  == dateConverted.Month)).ToList();
+            var timesDB = (await _timeRepository.Select(x => x.UserID == userId && x.CreatedDate.Month  == month.Month)).ToList();
 
             if (timesDB.Count == 0)
                 throw new NotFoundException("No time posting found");
